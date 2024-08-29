@@ -19,13 +19,16 @@ import { useFetch } from "../../../lib/fetch";
 import { icons, images } from "../../../constants";
 import HamburgerMenu from "../../../assets/icons/hamburger-menu.svg";
 import { LinearGradient } from "expo-linear-gradient";
+import { Ride } from "../../../types/ride";
 
 export default function Page() {
   const { user } = useUser();
   const { signOut } = useAuth();
 
   // fetch recent rides
-  const { data: recentRides, loading } = useFetch(`/(api)/ride/${user?.id}`);
+  const { data: recentRides, loading } = useFetch<Ride[]>(
+    `/(api)/ride/${user?.id}`
+  );
 
   // handle use location
   const { setUserLocation, setDestinationLocation } = useLocationStore();
