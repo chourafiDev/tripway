@@ -1,79 +1,75 @@
-import { Image, Text, View } from "react-native";
-import { icons } from "../constants";
+import { Text, View } from "react-native";
 import { Ride } from "../types/ride";
 import { formatDate, formatTime } from "../lib/utils";
+import MapArrowRightBold from "../assets/icons/map-arrow-right-bold.svg";
+import MapPoint from "../assets/icons/map-point.svg";
+import Calendar from "../assets/icons/calendar.svg";
 
 const RideCard = ({ ride }: { ride: Ride }) => {
   return (
-    <View className="flex flex-row items-center justify-center bg-white rounded-lg shadow-sm shadow-neutral-300 mb-3">
-      <View className="flex flex-col items-start justify-center p-3">
-        <View className="flex flex-row items-center justify-between">
-          <Image
-            source={{
-              uri: `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${ride.destination_longitude},${ride.destination_latitude}&zoom=14&apiKey=${process.env.EXPO_PUBLIC_GEOAPIFY_API_KEY}`,
-            }}
-            className="w-[80px] h-[90px] rounded-lg"
-          />
+    <View className="p-4 bg-white rounded-3xl shadow-xl shadow-neutral-100 mb-3">
+      <View className="flex flex-col gap-y-3 flex-1">
+        <View className="flex flex-row items-center gap-x-4">
+          <MapArrowRightBold width={17} height={17} color="#0262E4" />
+          <Text
+            className="text-base text-navy font-JakartaBold mb-1"
+            numberOfLines={1}
+          >
+            {ride.origin_address}
+          </Text>
+        </View>
+        <View className="flex flex-row items-center gap-x-4">
+          <MapPoint width={17} height={17} color="#0262E4" />
+          <Text
+            className="text-base text-navy font-JakartaBold mb-1"
+            numberOfLines={1}
+          >
+            {ride.destination_address}
+          </Text>
+        </View>
+        <View className="flex flex-row items-center gap-x-4">
+          <Calendar width={17} height={17} color="#0262E4" />
+          <Text
+            className="text-base text-navy font-JakartaBold mb-1"
+            numberOfLines={1}
+          >
+            {formatDate(ride.created_at)}, {formatTime(ride.ride_time)}
+          </Text>
+        </View>
+      </View>
 
-          <View className="flex flex-col mx-5 gap-y-5 flex-1">
-            <View className="flex flex-row items-center gap-x-2">
-              <Image source={icons.to} className="w-5 h-5" />
-              <Text className="text-md font-JakartaMedium" numberOfLines={1}>
-                {ride.origin_address}
-              </Text>
-            </View>
-
-            <View className="flex flex-row items-center gap-x-2">
-              <Image source={icons.point} className="w-5 h-5" />
-              <Text className="text-md font-JakartaMedium" numberOfLines={1}>
-                {ride.destination_address}
-              </Text>
-            </View>
-          </View>
+      <View className="mt-5 pt-5 border-t border-dashed border-navy/10">
+        <View className="flex flex-row items-center w-full justify-between mb-4 border-b border-navy/5 pb-4">
+          <Text className="text-[15px] font-JakartaSemiBold text-navy/70">
+            Driver
+          </Text>
+          <Text className="text-base font-JakartaSemiBold text-navy">
+            {ride.driver.first_name} {ride.driver.last_name}
+          </Text>
         </View>
 
-        <View className="flex flex-col w-full mt-5 bg-general-500 rounded-lg p-3 items-start justify-center">
-          <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Date & Time
-            </Text>
-            <Text className="text-md font-JakartaBold" numberOfLines={1}>
-              {formatDate(ride.created_at)}, {formatTime(ride.ride_time)}
-            </Text>
-          </View>
+        <View className="flex flex-row items-center w-full justify-between mb-4 border-b border-navy/5 pb-4">
+          <Text className="text-[15px] font-JakartaSemiBold text-navy/70">
+            Car Seats
+          </Text>
+          <Text className="text-[15px] font-JakartaSemiBold text-brand bg-brand/10 px-4 pb-1 rounded-full">
+            {ride.driver.car_seats} Seats
+          </Text>
+        </View>
 
-          <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Driver
-            </Text>
-            <Text className="text-md font-JakartaBold">
-              {ride.driver.first_name} {ride.driver.last_name}
-            </Text>
-          </View>
-
-          <View className="flex flex-row items-center w-full justify-between mb-5">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Car Seats
-            </Text>
-            <Text className="text-md font-JakartaBold">
-              {ride.driver.car_seats}
-            </Text>
-          </View>
-
-          <View className="flex flex-row items-center w-full justify-between">
-            <Text className="text-md font-JakartaMedium text-gray-500">
-              Payment Status
-            </Text>
-            <Text
-              className={`text-md capitalize font-JakartaBold ${
-                ride.payment_status === "paid"
-                  ? "text-green-500"
-                  : "text-red-500"
-              }`}
-            >
-              {ride.payment_status}
-            </Text>
-          </View>
+        <View className="flex flex-row items-center w-full justify-between">
+          <Text className="text-md font-JakartaSemiBold text-navy/70">
+            Payment Status
+          </Text>
+          <Text
+            className={`text-[15px] capitalize font-JakartaSemiBold px-3 pb-1 rounded-full ${
+              ride.payment_status === "paid"
+                ? "text-green bg-green/10"
+                : "text-red-500 bg-red-300"
+            }`}
+          >
+            {ride.payment_status}
+          </Text>
         </View>
       </View>
     </View>

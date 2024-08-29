@@ -1,13 +1,16 @@
 import { Alert, Image, ScrollView, Text, View } from "react-native";
+import ReactNativeModal from "react-native-modal";
 import React, { useState } from "react";
-import { icons, images } from "../../constants";
 import InputField from "../../components/InputField";
 import CustomButton from "../../components/CustomButton";
-import { Link, router } from "expo-router";
 import OAuth from "../../components/OAuth";
+import { Link, router } from "expo-router";
 import { useSignUp } from "@clerk/clerk-expo";
-import ReactNativeModal from "react-native-modal";
+import { images } from "../../constants";
 import { fetchAPI } from "../../lib/fetch";
+import EmailIcon from "../../assets/icons/email.svg";
+import LockIcon from "../../assets/icons/lock.svg";
+import PersonIcon from "../../assets/icons/person.svg";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -83,7 +86,7 @@ const SignUp = () => {
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
           <Image source={images.signUpCar} className="w-full h-[250px] z-0" />
-          <Text className="text-2xl text-black font-JakartaSemiBold absolute bottom-5 left-5">
+          <Text className="text-2xl text-navy font-JakartaBold absolute bottom-5 left-5">
             Create Your Account
           </Text>
         </View>
@@ -93,21 +96,21 @@ const SignUp = () => {
             <InputField
               label="Name"
               placeholder="Enter your name"
-              icon={icons.person}
+              Icon={() => <PersonIcon width={20} height={20} color="#858F9E" />}
               value={form.name}
               onChangeText={(value) => setForm({ ...form, name: value })}
             />
             <InputField
               label="Email"
               placeholder="Enter your email"
-              icon={icons.email}
+              Icon={() => <EmailIcon width={20} height={20} color="#858F9E" />}
               value={form.email}
               onChangeText={(value) => setForm({ ...form, email: value })}
             />
             <InputField
               label="Password"
               placeholder="Enter your password"
-              icon={icons.lock}
+              Icon={() => <LockIcon width={20} height={20} color="#858F9E" />}
               value={form.password}
               secureTextEntry={true}
               onChangeText={(value) => setForm({ ...form, password: value })}
@@ -119,10 +122,10 @@ const SignUp = () => {
 
           <Link
             href="/(auth)/sign-in"
-            className="text-lg text-center text-general-200 mt-8"
+            className="text-lg text-center text-navy font-JakartaMedium mt-5"
           >
             <Text>Already have an account? </Text>
-            <Text className="text-primary-500">Sign In</Text>
+            <Text className="text-brand">Sign In</Text>
           </Link>
         </View>
 
@@ -141,7 +144,7 @@ const SignUp = () => {
               We have sent verification code to {form.email}
             </Text>
 
-            <InputField
+            {/* <InputField
               label="Verification Code"
               placeholder="Enter verification code"
               value={verification.code}
@@ -150,7 +153,7 @@ const SignUp = () => {
                 setVerification({ ...verification, code: value })
               }
               keyboardType="number-pad"
-            />
+            /> */}
 
             {verification.error && (
               <Text className="text-red-500 text-sm mt-1">

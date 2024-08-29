@@ -1,30 +1,24 @@
-import { Stack, Tabs } from "expo-router";
-import { Image, ImageSourcePropType, View } from "react-native";
-import { icons } from "../../../constants";
+import { Tabs } from "expo-router";
+import { View } from "react-native";
+import { cn } from "../../../lib/utils";
+import UserIcon from "../../../assets/icons/user.svg";
+import DialogIcon from "../../../assets/icons/dialog.svg";
+import StreetsMapIcon from "../../../assets/icons/streets-map.svg";
+import GlobalIcon from "../../../assets/icons/global.svg";
 
 type TabIconProps = {
   focused: boolean;
-  source: ImageSourcePropType;
+  Icon: any;
 };
 
-const TabIcon = ({ focused, source }: TabIconProps) => (
+const TabIcon = ({ focused, Icon }: TabIconProps) => (
   <View
-    className={`flex flex-row justify-center items-center rounded-full ${
-      focused ? "bg-general-300" : ""
-    }`}
+    className={cn(
+      "flex w-12 h-12 justify-center items-center rounded-2xl",
+      focused && "bg-brand"
+    )}
   >
-    <View
-      className={`flex w-12 h-12 justify-center items-center rounded-full ${
-        focused ? "bg-general-400" : ""
-      }`}
-    >
-      <Image
-        source={source}
-        tintColor="white"
-        resizeMode="contain"
-        className="w-7 h-7"
-      />
-    </View>
+    <Icon />
   </View>
 );
 
@@ -37,11 +31,10 @@ const Layout = () => {
         tabBarInactiveTintColor: "white",
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#333333",
-          borderRadius: 50,
-          paddingBottom: 0,
+          backgroundColor: "#0C203D",
+          borderRadius: 24,
           overflow: "hidden",
-          marginHorizontal: 20,
+          marginHorizontal: 16,
           marginBottom: 20,
           height: 70,
           display: "flex",
@@ -58,7 +51,10 @@ const Layout = () => {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={icons.home} />
+            <TabIcon
+              focused={focused}
+              Icon={() => <GlobalIcon color="#ffffff" width={30} height={30} />}
+            />
           ),
         }}
       />
@@ -68,7 +64,12 @@ const Layout = () => {
           title: "Rides",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={icons.list} />
+            <TabIcon
+              focused={focused}
+              Icon={() => (
+                <StreetsMapIcon color="#ffffff" width={30} height={30} />
+              )}
+            />
           ),
         }}
       />
@@ -78,7 +79,10 @@ const Layout = () => {
           title: "Chat",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={icons.chat} />
+            <TabIcon
+              focused={focused}
+              Icon={() => <DialogIcon color="#ffffff" width={30} height={30} />}
+            />
           ),
         }}
       />
@@ -88,7 +92,10 @@ const Layout = () => {
           title: "Profile",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} source={icons.profile} />
+            <TabIcon
+              focused={focused}
+              Icon={() => <UserIcon color="#ffffff" width={30} height={30} />}
+            />
           ),
         }}
       />

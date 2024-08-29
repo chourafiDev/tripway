@@ -1,18 +1,32 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import CustomButton from "./CustomButton";
 import { icons } from "../constants";
+import { useCallback } from "react";
+import { useOAuth } from "@clerk/clerk-expo";
+import { googleOAuth } from "../lib/auth";
+import { router } from "expo-router";
 
 const OAuth = () => {
-  const handleGoogleSignIn = () => {
-    // Google Sign In Logic
-  };
+  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+
+  const handleGoogleSignIn = useCallback(async () => {
+    try {
+      const result = await googleOAuth(startOAuthFlow);
+
+      if (result.code === "session_exists" || result.code === "success") {
+        router.replace("/(root)/(tabs)/home");
+      }
+    } catch (err) {
+      console.error("OAuth error", err);
+    }
+  }, []);
 
   return (
     <View>
       <View className="flex flex-row justify-center items-center my-3 gap-x-3">
-        <View className="flex-1 h-[1px] bg-general-100" />
+        <View className="flex-1 h-[1px] bg-regent-grey/10" />
         <Text className="text-lg">Or</Text>
-        <View className="flex-1 h-[1px] bg-general-100" />
+        <View className="flex-1 h-[1px] bg-regent-grey/10" />
       </View>
 
       <CustomButton
