@@ -1,8 +1,7 @@
 import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { router, useNavigation } from "expo-router";
-import { DrawerActions } from "@react-navigation/native";
+import { router } from "expo-router";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import GlobalPoint from "../assets/icons/global.svg";
 import StreetsMapPoint from "../assets/icons/streets-map.svg";
@@ -13,13 +12,8 @@ import SettingsIcon from "../assets/icons/settings.svg";
 import NotificationIcon from "../assets/icons/notification.svg";
 
 export default function CustomDrawerContent(props: any) {
-  const navigation = useNavigation();
   const { user } = useUser();
   const { signOut } = useAuth();
-
-  const closeDrawer = () => {
-    navigation.dispatch(DrawerActions.closeDrawer());
-  };
 
   // handle sign out
   const handleSignOut = () => {
@@ -29,17 +23,23 @@ export default function CustomDrawerContent(props: any) {
   return (
     <View className="p-4 flex-1">
       <DrawerContentScrollView {...props} scrollEnabled={false}>
-        <View className="mb-6 flex-row items-center gap-x-4 border-b border-regent-grey/20 pb-6">
+        <View className="mb-6 flex-row items-center gap-x-3 border-b border-regent-grey/20 pb-6">
           <Image
             source={{
               uri: user?.externalAccounts[0]?.imageUrl ?? user?.imageUrl,
             }}
             className="h-14 w-14 rounded-full shadow-xl shadow-regent-grey"
           />
-          <Text className="font-JakartaBold text-xl">
-            <Text>{user?.firstName} </Text>
-            <Text>{user?.lastName}</Text>
-          </Text>
+          {user?.firstName && user?.lastName ? (
+            <Text className="font-JakartaBold text-xl">
+              <Text>{user?.firstName} </Text>
+              <Text>{user?.lastName}</Text>
+            </Text>
+          ) : (
+            <Text className="font-JakartaBold text-xl">
+              {user?.emailAddresses[0].emailAddress.split("@")[0]}
+            </Text>
+          )}
         </View>
 
         <View>

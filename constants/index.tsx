@@ -1,24 +1,10 @@
-import arrowDown from "../assets/icons/arrow-down.png";
-import arrowUp from "../assets/icons/arrow-up.png";
-import backArrow from "../assets/icons/back-arrow.png";
-import checkmark from "../assets/icons/check.png";
-import close from "../assets/icons/close.png";
+import { StyleSheet, Platform } from "react-native";
 import dollar from "../assets/icons/dollar.png";
-import email from "../assets/icons/email.png";
-import eyecross from "../assets/icons/eyecross.png";
 import google from "../assets/icons/google.png";
-import lock from "../assets/icons/lock.png";
-import map from "../assets/icons/map.png";
 import marker from "../assets/icons/marker.png";
-import out from "../assets/icons/out.png";
-import person from "../assets/icons/person.png";
 import pin from "../assets/icons/pin.png";
-import point from "../assets/icons/point.png";
-import search from "../assets/icons/search.png";
 import selectedMarker from "../assets/icons/selected-marker.png";
 import star from "../assets/icons/star.png";
-import target from "../assets/icons/target.png";
-import to from "../assets/icons/to.png";
 import check from "../assets/images/check.png";
 import getStarted from "../assets/images/get-started.png";
 import message from "../assets/images/message.png";
@@ -27,6 +13,7 @@ import onboarding1 from "../assets/images/onboarding1.png";
 import onboarding2 from "../assets/images/onboarding2.png";
 import onboarding3 from "../assets/images/onboarding3.png";
 import signUpCar from "../assets/images/signup-car.png";
+import verification from "../assets/images/verification.png";
 
 export const images = {
   onboarding1,
@@ -37,30 +24,16 @@ export const images = {
   check,
   noResult,
   message,
+  verification,
 };
 
 export const icons = {
-  arrowDown,
-  arrowUp,
-  backArrow,
-  checkmark,
-  close,
   dollar,
-  email,
-  eyecross,
   google,
-  lock,
-  map,
   marker,
-  out,
-  person,
   pin,
-  point,
-  search,
   selectedMarker,
   star,
-  target,
-  to,
 };
 
 export const onboarding = [
@@ -90,3 +63,33 @@ export const onboarding = [
 export const data = {
   onboarding,
 };
+
+// confirmation code field style
+export const CELL_SIZE = 53;
+export const CELL_BORDER_RADIUS = 18;
+export const DEFAULT_CELL_BG_COLOR = "#F7F9FC";
+export const NOT_EMPTY_CELL_BG_COLOR = "#0262E4";
+export const ACTIVE_CELL_BG_COLOR = "#F7F9FC";
+
+export const styles = StyleSheet.create({
+  codeFieldRoot: {
+    height: CELL_SIZE,
+    marginTop: 10,
+    paddingHorizontal: 20,
+    justifyContent: "center",
+  },
+  cell: {
+    marginHorizontal: 2,
+    height: CELL_SIZE,
+    width: CELL_SIZE,
+    lineHeight: CELL_SIZE - -14,
+    ...Platform.select({ web: { lineHeight: 65 } }),
+    fontSize: 30,
+    textAlign: "center",
+    borderRadius: CELL_BORDER_RADIUS,
+    color: "#0262E4",
+    borderWidth: 1,
+    borderColor: "rgba(12, 32, 61, 0.3)",
+    borderStyle: "solid",
+  },
+});

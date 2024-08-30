@@ -11,9 +11,11 @@ import { fetchAPI } from "../../lib/fetch";
 import EmailIcon from "../../assets/icons/email.svg";
 import LockIcon from "../../assets/icons/lock.svg";
 import PersonIcon from "../../assets/icons/person.svg";
+import ConfirmationCodeFiled from "../../components/ConfirmationCodeFiled";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const [codeValue, setCodeValue] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -24,7 +26,6 @@ const SignUp = () => {
   const [verification, setVerification] = useState({
     state: "default",
     error: "",
-    code: "",
   });
 
   const onSignUpPress = async () => {
@@ -51,7 +52,7 @@ const SignUp = () => {
 
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code: verification.code,
+        code: codeValue,
       });
 
       if (completeSignUp.status === "complete") {
@@ -77,10 +78,11 @@ const SignUp = () => {
       setVerification({
         ...verification,
         error: err.errors[0].longMessage,
-        state: "failed",
+        // state: "failed",
       });
     }
   };
+
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -136,24 +138,21 @@ const SignUp = () => {
             verification.state === "success" && setShowSuccessModal(true);
           }}
         >
-          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
-            <Text className="text-2xl font-JakartaExtraBold mb-2">
+          <View className="bg-white p-3 rounded-2xl min-h-[300px]">
+            <Text className="text-3xl text-navy pt-4 text-center font-JakartaExtraBold mb-2">
               Verification
             </Text>
-            <Text className="font-JakartaMedium mb-5">
-              We have sent verification code to {form.email}
+            <Image
+              className="w-20 h-20 mx-auto mb-4 mt-6"
+              source={images.verification}
+            />
+            <Text className="font-JakartaMedium text-navy/60 text-[16px] text-center mb-5">
+              Please enter the verification code{"\n"}
+              we send to your email address{" "}
+              <Text className="text-brand">{form.email}</Text>
             </Text>
 
-            {/* <InputField
-              label="Verification Code"
-              placeholder="Enter verification code"
-              value={verification.code}
-              icon={icons.lock}
-              onChangeText={(value) =>
-                setVerification({ ...verification, code: value })
-              }
-              keyboardType="number-pad"
-            /> */}
+            <ConfirmationCodeFiled value={codeValue} setValue={setCodeValue} />
 
             {verification.error && (
               <Text className="text-red-500 text-sm mt-1">
@@ -164,7 +163,7 @@ const SignUp = () => {
             <CustomButton
               title="Verify Email"
               onPress={onPressVerify}
-              className="mt-5 bg-success-500"
+              className="mt-5"
             />
           </View>
         </ReactNativeModal>
@@ -172,10 +171,10 @@ const SignUp = () => {
         <ReactNativeModal isVisible={showSuccessModal}>
           <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
             <Image source={images.check} className="w-20 h-20 mx-auto my-5" />
-            <Text className="text-3xl font-JakartaBold text-center">
+            <Text className="text-3xl text-navy font-JakartaBold text-center">
               Verified
             </Text>
-            <Text className="text-base text-gray-400 mt-2 font-JakartaMedium text-center">
+            <Text className="text-base text-navy/50 mt-2 font-JakartaMedium text-center">
               You have successfully verified your account.
             </Text>
             <CustomButton

@@ -1,7 +1,6 @@
 import { useUser } from "@clerk/clerk-expo";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import RideCard from "../../../components/RideCard";
 import { images } from "../../../constants";
 import { useFetch } from "../../../lib/fetch";
@@ -21,7 +20,7 @@ const Rides = () => {
       <FlatList
         data={recentRides}
         renderItem={({ item }) => <RideCard ride={item} />}
-        keyExtractor={(item, index) => item.toString()}
+        keyExtractor={(_, index) => index.toString()}
         className="px-5"
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{
@@ -49,7 +48,8 @@ const Rides = () => {
         )}
         ListHeaderComponent={
           <Text className="text-2xl text-navy font-JakartaBold my-5">
-            All Rides
+            All Rides{" "}
+            <Text className="text-brand">({recentRides?.length})</Text>
           </Text>
         }
       />

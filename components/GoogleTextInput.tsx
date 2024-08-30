@@ -105,7 +105,6 @@ export const GoogleTextInput2 = ({
             },
           }}
           onPress={(data, details = null) => {
-            console.log("test 2 -----------------");
             handlePress({
               latitude: details?.geometry.location.lat!,
               longitude: details?.geometry.location.lng!,

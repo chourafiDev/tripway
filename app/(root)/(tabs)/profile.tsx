@@ -4,10 +4,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import InputField from "../../../components/InputField";
 import HamburgerMenu from "../../../assets/icons/hamburger-menu.svg";
 import AltArrowLeft from "../../../assets/icons/alt-arrow-left.svg";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
 
 const Profile = () => {
   const { user } = useUser();
+
+  // open drawer
+  const navigation = useNavigation();
+  const handleOpenDrawer = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -25,7 +32,9 @@ const Profile = () => {
           <Text className="text-[22px] font-JakartaExtraBold text-navy">
             Profile
           </Text>
-          <HamburgerMenu width={25} height={25} color="#0C203D" />
+          <TouchableOpacity onPress={handleOpenDrawer}>
+            <HamburgerMenu width={25} height={25} color="#0C203D" />
+          </TouchableOpacity>
         </View>
 
         <View className="flex items-center justify-center my-5">

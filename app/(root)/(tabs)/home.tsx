@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { router, useNavigation } from "expo-router";
 import * as Location from "expo-location";
-import { useAuth, useUser } from "@clerk/clerk-expo";
+import { useUser } from "@clerk/clerk-expo";
 import RideCard from "../../../components/RideCard";
 import { GoogleTextInput2 } from "../../../components/GoogleTextInput";
 import Map from "../../../components/Map";
@@ -75,7 +75,7 @@ export default function Page() {
   };
 
   return (
-    <ScrollView className="flex-1 bg-ghost-white">
+    <View className="flex-1 bg-ghost-white">
       <View className="bg-brand relative rounded-b-3xl shadow-xl shadow-regent-grey/80 px-4 py-8 mb-3">
         <View className="flex flex-row items-center justify-between mt-5 mb-8">
           <View className="absolute -top-36 -right-5 w-56 h-96 rotate-[65deg]">
@@ -157,6 +157,6 @@ export default function Page() {
           </Text>
         }
       />
-    </ScrollView>
+    </View>
   );
 }

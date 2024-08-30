@@ -5,8 +5,6 @@ import { icons } from "../constants";
 import { cn, formatTime } from "../lib/utils";
 
 const DriverCard = ({ item, selected, setSelected }: DriverCardProps) => {
-  console.log("selected", selected);
-  console.log("item.id", item.id);
   return (
     <TouchableOpacity
       onPress={setSelected}
