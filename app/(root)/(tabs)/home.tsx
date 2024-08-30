@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import * as Location from "expo-location";
 import { useAuth, useUser } from "@clerk/clerk-expo";
 import RideCard from "../../../components/RideCard";
@@ -16,14 +16,14 @@ import { GoogleTextInput2 } from "../../../components/GoogleTextInput";
 import Map from "../../../components/Map";
 import { useLocationStore } from "../../../store";
 import { useFetch } from "../../../lib/fetch";
-import { icons, images } from "../../../constants";
+import { images } from "../../../constants";
 import HamburgerMenu from "../../../assets/icons/hamburger-menu.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ride } from "../../../types/ride";
+import { DrawerActions } from "@react-navigation/native";
 
 export default function Page() {
   const { user } = useUser();
-  const { signOut } = useAuth();
 
   // fetch recent rides
   const { data: recentRides, loading } = useFetch<Ride[]>(
@@ -68,10 +68,10 @@ export default function Page() {
     router.push("/(root)/find-ride");
   };
 
-  // handle sign out
-  const handleSignOut = () => {
-    signOut();
-    router.replace("/(auth)/sign-in");
+  // open drawer
+  const navigation = useNavigation();
+  const handleOpenDrawer = () => {
+    navigation.dispatch(DrawerActions.openDrawer());
   };
 
   return (
@@ -80,13 +80,13 @@ export default function Page() {
         <View className="flex flex-row items-center justify-between mt-5 mb-8">
           <View className="absolute -top-36 -right-5 w-56 h-96 rotate-[65deg]">
             <LinearGradient
-              colors={["rgba(255, 255, 255, 0.3)", "transparent"]}
+              colors={["rgba(255, 255, 255, 0.4)", "transparent"]}
               className="h-full"
             />
           </View>
           <View className="absolute top-8 -right-0 w-28 h-96 rotate-[65deg]">
             <LinearGradient
-              colors={["rgba(255, 255, 255, 0.3)", "transparent"]}
+              colors={["rgba(255, 255, 255, 0.4)", "transparent"]}
               className="h-full"
             />
           </View>
@@ -100,7 +100,7 @@ export default function Page() {
             </Text>
           </View>
           <TouchableOpacity
-            onPress={handleSignOut}
+            onPress={handleOpenDrawer}
             className="border border-white/10 p-[3px] rounded-full flex flex-row items-center gap-x-2"
           >
             <HamburgerMenu width={25} height={25} color="#ffffff" />
