@@ -43,7 +43,7 @@ const SignIn = () => {
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
-          <Image source={images.signUpCar} className="w-full h-[250px] z-0" />
+          <Image source={images.banner} className="w-full h-[250px] z-0" />
           <Text className="text-2xl text-navy font-JakartaSemiBold absolute bottom-5 left-5">
             Welcome 👋
           </Text>

@@ -12,6 +12,7 @@ import EmailIcon from "../../assets/icons/email.svg";
 import LockIcon from "../../assets/icons/lock.svg";
 import PersonIcon from "../../assets/icons/person.svg";
 import ConfirmationCodeFiled from "../../components/ConfirmationCodeFiled";
+import { LinearGradient } from "expo-linear-gradient";
 
 const SignUp = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -87,7 +88,15 @@ const SignUp = () => {
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
-          <Image source={images.signUpCar} className="w-full h-[250px] z-0" />
+          <Image source={images.banner} className="w-full h-[250px] z-0" />
+          <View className="absolute bottom-0 left-0 right-0 h-28 w-full">
+            <LinearGradient
+              colors={["transparent", "#ffffff"]}
+              locations={[0.1, 1]}
+              // start={{ x: 0, y: 0 }}
+              className="h-full w-full"
+            />
+          </View>
           <Text className="text-2xl text-navy font-JakartaBold absolute bottom-5 left-5">
             Create Your Account
           </Text>
