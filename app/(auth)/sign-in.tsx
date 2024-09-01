@@ -9,6 +9,7 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { images } from "../../constants";
 import EmailIcon from "../../assets/icons/email.svg";
 import LockIcon from "../../assets/icons/lock.svg";
+import { LinearGradient } from "expo-linear-gradient";
 
 const SignIn = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -44,6 +45,21 @@ const SignIn = () => {
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
           <Image source={images.banner} className="w-full h-[250px] z-0" />
+          <View className="absolute -bottom-3 left-0 right-0 h-full w-full">
+            <LinearGradient
+              colors={[
+                "transparent",
+                "rgba(255, 255, 255, 0.2)",
+                "rgba(255, 255, 255, 0.5)",
+                "rgba(255, 255, 255, 0.8)",
+                "#ffffff",
+              ]}
+              locations={[0.1, 0.3, 0.5, 0.7, 0.9]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              className="h-full w-full"
+            />
+          </View>
           <Text className="text-2xl text-navy font-JakartaSemiBold absolute bottom-5 left-5">
             Welcome 👋
           </Text>

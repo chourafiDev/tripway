@@ -89,11 +89,18 @@ const SignUp = () => {
       <View className="flex-1 bg-white">
         <View className="relative w-full h-[250px]">
           <Image source={images.banner} className="w-full h-[250px] z-0" />
-          <View className="absolute bottom-0 left-0 right-0 h-28 w-full">
+          <View className="absolute -bottom-3 left-0 right-0 h-full w-full">
             <LinearGradient
-              colors={["transparent", "#ffffff"]}
-              locations={[0.1, 1]}
-              // start={{ x: 0, y: 0 }}
+              colors={[
+                "transparent",
+                "rgba(255, 255, 255, 0.2)",
+                "rgba(255, 255, 255, 0.5)",
+                "rgba(255, 255, 255, 0.8)",
+                "#ffffff",
+              ]}
+              locations={[0.1, 0.3, 0.5, 0.7, 0.9]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
               className="h-full w-full"
             />
           </View>
