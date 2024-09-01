@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { router, useNavigation } from "expo-router";
+import { Link, router, useNavigation } from "expo-router";
 import * as Location from "expo-location";
 import { useUser } from "@clerk/clerk-expo";
 import RideCard from "../../../components/RideCard";
@@ -18,6 +18,7 @@ import { useLocationStore } from "../../../store";
 import { useFetch } from "../../../lib/fetch";
 import { images } from "../../../constants";
 import HamburgerMenu from "../../../assets/icons/hamburger-menu.svg";
+import ArrowRight from "../../../assets/icons/arrow-right.svg";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ride } from "../../../types/ride";
 import { DrawerActions } from "@react-navigation/native";
@@ -63,7 +64,6 @@ export default function Page() {
     longitude: number;
     address: string;
   }) => {
-    console.log("test");
     setDestinationLocation(location);
     router.push("/(root)/find-ride");
   };
@@ -114,49 +114,63 @@ export default function Page() {
         <GoogleTextInput2 handlePress={handleDestinationPress} />
       </View>
 
-      <View className="p-4 mb-3">
-        <Text className="text-xl text-navy font-JakartaBold mb-3">
-          Your current location
-        </Text>
-        <View className="flex flex-row items-center justify-center bg-white p-1 rounded-3xl overflow-hidden h-[300px]">
-          <Map />
-        </View>
-      </View>
-
-      <FlatList
-        data={recentRides?.slice(0, 5)}
-        renderItem={({ item }) => <RideCard ride={item} />}
-        keyExtractor={(item, index) => index.toString()}
-        className="mx-4"
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={{
-          paddingBottom: 100,
-        }}
-        ListEmptyComponent={() => (
-          <View className="flex flex-col items-center justify-center">
-            {!loading ? (
-              <>
-                <Image
-                  source={images.noResult}
-                  className="w-40 h-40"
-                  alt="No recent rides found"
-                  resizeMode="contain"
-                />
-                <Text className="text-sm text-navy font-JakartaSemiBold">
-                  No recent rides found
-                </Text>
-              </>
-            ) : (
-              <ActivityIndicator size="small" color="#000" />
-            )}
-          </View>
-        )}
-        ListHeaderComponent={
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="p-4 mb-3">
           <Text className="text-xl text-navy font-JakartaBold mb-3">
-            Recent Rides
+            Your current location
           </Text>
-        }
-      />
+          <View className="flex flex-row items-center justify-center bg-white p-1 rounded-3xl overflow-hidden h-[300px]">
+            <Map />
+          </View>
+        </View>
+
+        <FlatList
+          data={recentRides?.slice(0, 5)}
+          scrollEnabled={false}
+          renderItem={({ item }) => <RideCard ride={item} />}
+          keyExtractor={(item, index) => index.toString()}
+          className="mx-4"
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{
+            paddingBottom: 100,
+          }}
+          ListEmptyComponent={() => (
+            <View className="flex flex-col items-center justify-center">
+              {!loading ? (
+                <>
+                  <Image
+                    source={images.noResult}
+                    className="w-40 h-40"
+                    alt="No recent rides found"
+                    resizeMode="contain"
+                  />
+                  <Text className="text-sm text-navy font-JakartaSemiBold">
+                    No recent rides found
+                  </Text>
+                </>
+              ) : (
+                <ActivityIndicator size="small" color="#0262E4" />
+              )}
+            </View>
+          )}
+          ListHeaderComponent={
+            <View className="flex-row justify-between items-center mb-3">
+              <Text className="text-xl text-navy font-JakartaBold">
+                Recent Rides
+              </Text>
+
+              <Link href="/(root)/(tabs)/rides">
+                <View className="flex-row items-center gap-x-1">
+                  <Text className="text-base text-brand pb-1 font-JakartaBold">
+                    View All
+                  </Text>
+                  <ArrowRight color="#0262E4" width={16} height={16} />
+                </View>
+              </Link>
+            </View>
+          }
+        />
+      </ScrollView>
     </View>
   );
 }

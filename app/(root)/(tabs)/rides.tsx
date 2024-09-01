@@ -42,7 +42,7 @@ const Rides = () => {
                 </Text>
               </>
             ) : (
-              <ActivityIndicator size="small" color="#000" />
+              <ActivityIndicator size="small" color="#0262E4" />
             )}
           </View>
         )}
