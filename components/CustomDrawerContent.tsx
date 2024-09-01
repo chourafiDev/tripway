@@ -31,12 +31,12 @@ export default function CustomDrawerContent(props: any) {
             className="h-14 w-14 rounded-full shadow-xl shadow-regent-grey"
           />
           {user?.firstName && user?.lastName ? (
-            <Text className="font-JakartaBold text-xl">
+            <Text className="font-JakartaBold text-lg">
               <Text>{user?.firstName} </Text>
               <Text>{user?.lastName}</Text>
             </Text>
           ) : (
-            <Text className="font-JakartaBold text-xl">
+            <Text className="font-JakartaBold text-lg">
               {user?.emailAddresses[0].emailAddress.split("@")[0]}
             </Text>
           )}
@@ -51,7 +51,7 @@ export default function CustomDrawerContent(props: any) {
           >
             <GlobalPoint width={22} height={22} color="#0C203D" />
 
-            <Text className="text-navy text-lg font-JakartaBold">Home</Text>
+            <Text className="text-navy/70 text-lg font-JakartaBold">Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-6"
@@ -61,7 +61,9 @@ export default function CustomDrawerContent(props: any) {
           >
             <ArrowRightPoint width={22} height={22} color="#0C203D" />
 
-            <Text className="text-navy text-lg font-JakartaBold">Fin Trip</Text>
+            <Text className="text-navy/70 text-lg font-JakartaBold">
+              Fin Trip
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-6"
@@ -71,7 +73,7 @@ export default function CustomDrawerContent(props: any) {
           >
             <StreetsMapPoint width={22} height={22} color="#0C203D" />
 
-            <Text className="text-navy text-lg font-JakartaBold">Rides</Text>
+            <Text className="text-navy/70 text-lg font-JakartaBold">Rides</Text>
           </TouchableOpacity>
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-6"
@@ -81,7 +83,7 @@ export default function CustomDrawerContent(props: any) {
           >
             <NotificationIcon width={22} height={22} color="#0C203D" />
 
-            <Text className="text-navy text-lg font-JakartaBold">
+            <Text className="text-navy/70 text-lg font-JakartaBold">
               Notifications
             </Text>
           </TouchableOpacity>
@@ -92,7 +94,9 @@ export default function CustomDrawerContent(props: any) {
             }}
           >
             <SettingsIcon width={22} height={22} color="#0C203D" />
-            <Text className="text-navy text-lg font-JakartaBold">Settings</Text>
+            <Text className="text-navy/70 text-lg font-JakartaBold">
+              Settings
+            </Text>
           </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
@@ -105,14 +109,14 @@ export default function CustomDrawerContent(props: any) {
           }}
         >
           <HelpIcon width={22} height={22} color="#0C203D" />
-          <Text className="text-navy text-lg font-JakartaBold">Help</Text>
+          <Text className="text-navy/70 text-lg font-JakartaBold">Help</Text>
         </TouchableOpacity>
         <Pressable
           onPress={handleSignOut}
           className="flex-row space-x-5 items-center mb-6"
         >
           <LogoutIcon width={22} height={22} color="#0C203D" />
-          <Text className="text-navy text-lg font-JakartaBold">Log Out</Text>
+          <Text className="text-navy/70 text-lg font-JakartaBold">Log Out</Text>
         </Pressable>
       </View>
     </View>
