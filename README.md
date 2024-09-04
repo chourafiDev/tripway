@@ -1,7 +1,3 @@
- <div align=start>
-        <img src="https://res.cloudinary.com/abdelmonaime/image/upload/v1713271840/travel/icon_x9v79j.png" alt="Journey waypoints" height="150">
- </div>
-
 # Trip Way
 Trip Way is a mobile application which allows users to book rides, choose drivers, and make payments through Stripe. The app was built using React Native and TailwindCSS for styling, integrated with Google Maps for managing directions, and PostgreSQL (hosted on Neon) for database management. I implemented user authentication using Clerk, ensuring a secure and seamless experience for both passengers and drivers.
 
