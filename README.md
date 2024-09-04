@@ -1,50 +1,34 @@
-# Welcome to your Expo app 👋
+ <div align=start>
+        <img src="https://res.cloudinary.com/abdelmonaime/image/upload/v1713271840/travel/icon_x9v79j.png" alt="Journey waypoints" height="150">
+ </div>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Trip Way
+Trip Way is a mobile application which allows users to book rides, choose drivers, and make payments through Stripe. The app was built using React Native and TailwindCSS for styling, integrated with Google Maps for managing directions, and PostgreSQL (hosted on Neon) for database management. I implemented user authentication using Clerk, ensuring a secure and seamless experience for both passengers and drivers.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Destination Selection:** Users can input and choose their desired destination for the ride.
+- **Driver Selection:** Users can view available drivers and select the one they prefer for their trip.
+- **Ride Booking:** Users can book a ride through an easy-to-use interface and secure the ride details.
+- **Payment Integration:** Secure payment is handled through Stripe, allowing users to complete transactions seamlessly.
+- **Authentication with Clerk:** Users are authenticated securely using Clerk, ensuring safe and verified access to the app.
 
-   ```bash
-   npm install
-   ```
+## Technologies Used
 
-2. Start the app
+- **Frontend:** React Native with Expo, TypeScript, Tailwind CSS
+- **Database:** PostgreSQL
+- **Auth:** Clerk
+- **Handle Map:** Google Map
+- **Payment Processing:** Stripe
 
-   ```bash
-    npx expo start
-   ```
+## Getting Started
 
-In the output, you'll find options to open the app in a
+### Prerequisites
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js
+- npm or yarn
+- Use Expo to manage React Native app
+- PostgreSQL (hosted on Neon) for database
+- Stripe account for handling payments
+- Clerk account for handling authentication
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
